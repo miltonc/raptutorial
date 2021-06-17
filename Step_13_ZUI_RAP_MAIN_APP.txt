@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service definition MAIN APPLICATION'
+define service ZUI_RAP_MAIN_APP {
+  expose ZC_RAP_EMPLOYEE as Employee;
+  expose ZC_RAP_PROJECT as Project;
+}

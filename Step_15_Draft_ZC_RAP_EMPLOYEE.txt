@@ -1,0 +1,23 @@
+projection;
+use draft;
+
+define behavior for ZC_RAP_EMPLOYEE alias Employee
+use etag
+{
+  use create;
+  use update;
+  use delete;
+
+  use action setActive;
+
+  use association _Project { create; }
+}
+
+define behavior for ZC_RAP_PROJECT alias Project
+use etag
+{
+  use update;
+  use delete;
+
+  use association _Employee;
+}

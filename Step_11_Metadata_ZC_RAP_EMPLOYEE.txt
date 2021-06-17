@@ -1,0 +1,60 @@
+@Metadata.layer: #CORE
+
+@UI: {
+  headerInfo: { typeName: 'Employee',
+                typeNamePlural: 'Employees',
+                title: { type: #STANDARD, label: 'Employee', value: 'Id' } },
+  presentationVariant: [{ sortOrder: [{ by: 'Id', direction:  #DESC }] }] }
+  
+  
+annotate view ZC_RAP_EMPLOYEE
+    with 
+{
+    @UI.facet: [ { id:              'Employee',
+                 purpose:         #STANDARD,
+                 type:            #IDENTIFICATION_REFERENCE,
+                 label:           'Employee',
+                 position:        10 },
+               { id:              'Project',
+                 purpose:         #STANDARD,
+                 type:            #LINEITEM_REFERENCE,
+                 label:           'Project',
+                 position:        20,
+                 targetElement:   '_Project'} ]
+    
+    @UI:{ identification: [{ position: 1, label: 'Employee Id' }] }
+  Id;
+  
+  @UI: {  lineItem:       [ { position: 30 } ],
+          identification: [ { position: 30 } ],
+          selectionField: [ { position: 30 } ] }  
+  Firstname;
+  
+  @UI: {  lineItem:       [ { position: 40 } ],
+          identification: [ { position: 40 } ],
+          selectionField: [ { position: 40 } ] }  
+  Lastname;
+  
+  @UI: {  lineItem:       [ { position: 50 } ],
+          identification: [ { position: 50 } ],
+          selectionField: [ { position: 50 } ] }  
+  Role;
+  
+  @UI: {  lineItem:       [ { position: 60 } ],
+          identification: [ { position: 60 } ] }  
+  Age;
+
+  @UI: {  lineItem:       [ { position: 70 } ],
+          identification: [ { position: 70 } ] }   
+  Salary;
+  
+  @UI: {  lineItem:       [ { position: 80 }, { type: #FOR_ACTION, dataAction: 'setActive', label: 'Set Active' } ],
+        identification: [ { position: 80 }, { type: #FOR_ACTION, dataAction: 'setActive', label: 'Set Active' } ] }  
+  Active;
+
+  @UI.hidden: true
+  LastChangedAt;
+
+  @UI.hidden: true
+  LocalLastChangedAt;
+}

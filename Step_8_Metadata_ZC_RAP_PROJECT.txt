@@ -1,0 +1,34 @@
+@Metadata.layer: #CORE
+
+@UI: {
+  headerInfo: { typeName: 'Project',
+                typeNamePlural: 'Projects',
+                title: { type: #STANDARD, value: 'Id' } } }
+                
+annotate view ZC_RAP_PROJECT
+    with 
+{
+    @UI.facet: [ { id:            'Project',
+                 purpose:       #STANDARD,
+                 type:          #IDENTIFICATION_REFERENCE,
+                 label:         'Project',
+                 position:      10 }  ]
+    
+  @UI: { lineItem:       [ { position: 20 } ], 
+         identification: [ { position: 20, label: 'Project Id'  } ] }
+  Id;
+
+  @UI: { lineItem:       [ { position: 30 } ],
+         identification: [ { position: 30 } ] }
+  Name;
+
+  @UI: { lineItem:       [ { position: 40 } ],
+         identification: [ { position: 40 } ] }
+  Description;
+  
+  @UI.hidden: true
+  LastChangedAt;
+
+  @UI.hidden: true
+  LocalLastChangedAt;
+}

@@ -1,0 +1,15 @@
+@EndUserText.label : 'Project Table'
+@AbapCatalog.enhancement.category : #NOT_EXTENSIBLE
+@AbapCatalog.tableCategory : #TRANSPARENT
+@AbapCatalog.deliveryClass : #A
+@AbapCatalog.dataMaintenance : #ALLOWED
+define table zrap_project {
+  key client            : mandt not null;
+  key id                : sysuuid_x16 not null;
+  employee_id           : sysuuid_x16 not null;
+  name                  : abap.char(100);
+  description           : abap.char(500);
+  last_changed_at       : timestampl;
+  local_last_changed_at : timestampl;
+
+}

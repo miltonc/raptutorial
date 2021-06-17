@@ -1,0 +1,52 @@
+managed;
+
+define behavior for ZI_RAP_EMPLOYEE alias Employee
+persistent table ZRAP_EMPLOYEE
+lock master
+// authorization master ( instance )
+etag master LocalLastChangedAt
+{
+  create;
+  update;
+  delete;
+  association _Project { create; }
+
+  field ( numbering : managed, readonly ) Id;
+
+  mapping for zrap_employee
+  {
+    Id = id;
+    Firstname = firstname;
+    Lastname = lastname;
+    Role = role;
+    Age = age;
+    Salary = salary;
+    Active = active;
+    LastChangedAt = last_changed_at;
+    LocalLastChangedAt = local_last_changed_at;
+  }
+}
+
+define behavior for ZI_RAP_PROJECT alias Project
+persistent table ZRAP_PROJECT
+lock dependent by _Employee
+// authorization dependent by _Employee
+etag master LocalLastChangedAt
+{
+  update;
+  delete;
+  field ( readonly ) EmployeeId;
+  association _Employee;
+
+  field ( numbering : managed, readonly ) Id;
+
+  mapping for zrap_project
+  {
+    Id = id;
+    EmployeeId = employee_id;
+    Name = name;
+    Description = description;
+    LastChangedAt = last_changed_at;
+    LocalLastChangedAt = local_last_changed_at;
+  }
+}

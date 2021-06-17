@@ -1,0 +1,62 @@
+managed;
+with draft;
+
+define behavior for ZI_RAP_EMPLOYEE alias Employee
+implementation in class ZBP_I_EMPLOYEE unique
+persistent table zrap_employee
+draft table zdr_rap_employee
+lock master total etag LastChangedAt
+// authorization master ( instance )
+etag master LocalLastChangedAt
+{
+  create;
+  update;
+  delete;
+  association _Project { create; }
+
+  field ( numbering : managed, readonly ) Id;
+  field ( readonly ) Active, Salary;
+  field ( readonly ) LastChangedAt, LocalLastChangedAt;
+
+  action ( features : instance ) setActive result [1] $self;
+  determination changeSalary on save { field Role; }
+  validation validateAge on save { field Age; create; }
+
+  mapping for zrap_employee
+  {
+    Id = id;
+    Firstname = firstname;
+    Lastname = lastname;
+    Role = role;
+    Age = age;
+    Salary = salary;
+    Active = active;
+    LastChangedAt = last_changed_at;
+    LocalLastChangedAt = local_last_changed_at;
+  }
+}
+
+define behavior for ZI_RAP_PROJECT alias Project
+persistent table zrap_project
+draft table zdr_rap_project
+lock dependent by _Employee
+// authorization dependent by _Employee
+etag master LocalLastChangedAt
+{
+  update;
+  delete;
+  field ( readonly ) EmployeeId;
+  association _Employee;
+
+  field ( numbering : managed, readonly ) Id;
+
+  mapping for zrap_project
+  {
+    Id = id;
+    EmployeeId = employee_id;
+    Name = name;
+    Description = description;
+    LastChangedAt = last_changed_at;
+    LocalLastChangedAt = local_last_changed_at;
+  }
+}

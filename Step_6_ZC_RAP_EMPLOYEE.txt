@@ -1,0 +1,15 @@
+@EndUserText.label: 'Consumption view for EMPLOYEE'
+@AccessControl.authorizationCheck: #CHECK
+define root view entity ZC_RAP_EMPLOYEE as projection on ZI_RAP_EMPLOYEE as Employee {
+    key Id,
+    Firstname,
+    Lastname,
+    Age,
+    Role,
+    Salary,
+    Active,
+    LastChangedAt,
+    LocalLastChangedAt,
+    /* Associations */
+    _Project
+}
